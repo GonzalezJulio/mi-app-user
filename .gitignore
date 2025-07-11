@@ -1,0 +1,29 @@
+# Ignorar carpetas del runner
+actions-runner/
+_work/
+
+# Archivos temporales o de sistema
+*.log
+*.tmp
+*.swp
+*.bak
+
+# Archivos y carpetas de entorno
+.env
+__pycache__/
+*.pyc
+*.pyo
+
+# Docker
+*.tar
+*.gz
+*.img
+*.pid
+
+# Node (si usás en otro servicio)
+node_modules/
+
+# Otros
+.DS_Store
+.idea/
+.vscode/

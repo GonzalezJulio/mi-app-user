@@ -1,0 +1,27 @@
+name: Desplegar
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+    name: Ejecutar deploy en VM local
+
+    steps:
+      - name: Clonar el repositorio
+        uses: actions/checkout@v4
+
+      - name: Listar contenido raíz
+        run: ls -la
+
+      - name: Detener contenedores anteriores (si existen)
+        run: docker compose down || true
+
+      - name: Construir y levantar servicios
+        run: docker compose up -d --build
+
+      - name: Verificar estado de los contenedores
+        run: docker ps

@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  web:
+    build: ./app
+    container_name: flask-app
+    ports:
+      - "5000:5000"
+    environment:
+      - DATABASE_URL=postgresql://miuser:mipassword@db:5432/miappdb
+    depends_on:
+      - db
+
+  db:
+    image: postgres:15
+    container_name: postgres-db
+    environment:
+      POSTGRES_DB: miappdb
+      POSTGRES_USER: miuser
+      POSTGRES_PASSWORD: mipassword
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+volumes:
+  db_data:
