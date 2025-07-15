@@ -1,0 +1,22 @@
+name: Deploy Production
+
+on:
+  push:
+    branches:
+      - main    # Se dispara al hacer push a main
+  workflow_dispatch:  # Permite ejecutarlo manualmente
+
+jobs:
+  deploy:
+    runs-on: self-hosted  # Usa tu runner local
+
+    steps:
+    - name: Hacer pull del código main
+      run: |
+        cd ~/90DiasDevOps/Semana3/Dia19/mi-app-user
+        git pull origin main
+
+    - name: Levantar producción con Docker Compose
+      run: |
+        cd ~/90DiasDevOps/Semana3/Dia19/mi-app-user
+        docker compose -f docker-compose.prod.yml up -d --build
