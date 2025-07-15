@@ -34,5 +34,13 @@ def health():
         "message": "¡Mi aplicación Flask está funcionando! 🎉"
     })
 
+@app.route('/health')
+def health_check():
+    return jsonify({
+        "status": "OK",
+        "timestamp": datetime.utcnow().isoformat(),
+        "message": "¡Mi aplicación está funcionando! 🎉"
+    })
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)

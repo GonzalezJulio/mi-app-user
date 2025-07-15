@@ -2,8 +2,7 @@ name: Deploy con Docker Compose
 
 on:
   push:
-    branches:
-      - main
+    branches: [main, dia20]
   workflow_dispatch:
 
 jobs:
