@@ -1,0 +1,22 @@
+name: Deploy Staging
+
+on:
+  push:
+    branches:
+      - develop   # Se dispara al hacer push a develop
+  workflow_dispatch:  # Permite ejecutarlo manualmente
+
+jobs:
+  deploy:
+    runs-on: self-hosted  # Usa tu runner local
+
+    steps:
+    - name: Hacer pull del código develop
+      run: |
+        cd ~/90DiasDevOps/Semana3/Dia19/mi-app-user
+        git pull origin develop
+
+    - name: Levantar staging con Docker Compose
+      run: |
+        cd ~/90DiasDevOps/Semana3/Dia19/mi-app-user
+        docker compose -f docker-compose.staging.yml up -d --build

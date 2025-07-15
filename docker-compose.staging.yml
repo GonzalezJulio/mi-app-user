@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    ports:
+      - "8081:5000"  # Puerto diferente para staging
+    environment:
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DB_NAME=miappdb_staging
+      - DB_USER=miuser
+      - DB_PASS=secreta123
+    depends_on:
+      - db
+
+  db:
+    image: postgres:15
+    restart: always
+    environment:
+      POSTGRES_DB: miappdb_staging
+      POSTGRES_USER: miuser
+      POSTGRES_PASSWORD: secreta123
+    volumes:
+      - db-data-staging:/var/lib/postgresql/data
+
+volumes:
+  db-data-staging:
