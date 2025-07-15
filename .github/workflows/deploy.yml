@@ -1,0 +1,28 @@
+name: Deploy con Docker Compose
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: self-hosted  # <- Esto indica que use tu runner local
+
+    steps:
+    - name: Mostrar hostname
+      run: hostname
+
+    - name: Navegar al proyecto
+      run: cd ~/90DiasDevOps/Semana3/Dia19/mi-app-user && ls -la
+
+    - name: Hacer pull del último código
+      run: |
+        cd ~/90DiasDevOps/Semana3/Dia19/mi-app-user
+        git pull origin main
+
+    - name: Levantar contenedores con Docker Compose
+      run: |
+        cd ~/90DiasDevOps/Semana3/Dia19/mi-app-user
+        docker compose --env-file .env up -d --build
